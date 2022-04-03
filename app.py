@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request
 import pickle
+import sys
+import logging
 
 model = pickle.load(open('finalmodelchurn.pickle','rb'))
 
 app = Flask(__name__)
+
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 @app.route('/',methods=['POST','GET'])
 def home():
