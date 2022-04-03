@@ -308,5 +308,19 @@ h4{
     }
 } 
 
+@media screen and (max-width: 714px) {
+    p{
+        display: inline-block;
+        justify-content: center;
+        align-items: center;
+        text-indent: 15px;
+        font-size: 12px;
+    }
+    .home__content{
+        padding: 5rem;
+        width: 200px;
+    }
+}
+
 
 
