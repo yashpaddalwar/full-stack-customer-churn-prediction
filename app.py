@@ -16,7 +16,6 @@ def test():
 @app.route('/predict',methods=['POST','GET'])
 def predict():
     if request.method == 'POST':
-
         # Senior-Citizen
         is_seniorcitizen = request.form['seniorcitizen']
         if is_seniorcitizen == 'yes':
