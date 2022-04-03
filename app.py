@@ -230,7 +230,7 @@ def predict():
 
         return render_template('predict.html',prediction=prediction)
     else:    
-        return render_template('predict.html')
+        return render_template('home.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
