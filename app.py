@@ -4,6 +4,7 @@ import sys
 import logging
 
 model = pickle.load(open('finalmodelchurn.pickle','rb'))
+model1_probability1 = pickle.load(open('probabilities.pickle','rb'))
 
 app = Flask(__name__)
 
@@ -227,13 +228,24 @@ def predict():
         arr = [[seniorcitizen,monthlycharges,totalcharges,gender_Male,Partner_Yes,Dependent_Yes,PhoneService,MultipleLinesNoPhoneService,MultipleLines_Yes,InternetServiceFibreOptics,InternetService_No,OnlineSecurity_NoInternetService,OnlineSecurity_Yes,OnlineBackup_NoInternetService,OnlineBackup_Yes,DeviceProtection_NoInternetService,DeviceProtection_Yes,TechSupport_NoInternetService,TechSupport_Yes,StreamingTV_NoInternetService,StreamingTV_Yes,StreamingTVMovies_NoInternetService,StreamingTVMovies_Yes,Contract_One,Contract_Two,PaperlessBilling_Yes,PaymentMethod_CreditCard,PaymentMethod_ElectronicCheck,PaymentMethod_MailedCheck,tenure_Twelve,tenure_Twentyfour,tenure_Thirtysix,tenure_Fortyeight,tenure_Sixty]]
 
         prediction_arr = model.predict(arr)
+        prediction_probability = model1_probability1.predict_proba(arr)[:,1]
+        prediction_probability = "{:.2f}".format(prediction_probability[0]*100)
+
+        lst = []
+        for i in arr:
+            lst.append(i)
+        arr_new = lst[0]
+        # final_prob = arr_new[1]
+        # final_prob = round(final_prob)
         is_prediction = prediction_arr[0]
         if is_prediction == 1:
             prediction = 'churn'
         else:
             prediction = 'not churn'
-
-        return render_template('predict.html',prediction=prediction)
+        # prediction_probability = round(prediction_probability)
+        print(prediction_probability)
+        # return render_template('predict.html',prediction=prediction,final_prob=final_prob)
+        return render_template('predict.html',prediction=prediction,prediction_probability=prediction_probability)
     else:    
         return render_template('home.html')
 

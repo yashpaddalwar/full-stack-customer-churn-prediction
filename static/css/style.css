@@ -5,8 +5,20 @@
     --color-input-variant: rgb(170, 2, 232);
     --color-after-hover: rgb(222, 131, 255); 
     --color-h1: rgb(222, 131, 255); 
-    --color-white: white;
+    --color-white: rgb(222, 131, 255);
     --transition: all 400ms ease;
+    --color-white-new: white;
+
+}
+
+::-moz-selection { /* Code for Firefox */
+    color: red;
+    background: yellow;
+    }
+
+::selection {
+color: rgb(0, 0, 0);
+background: rgb(198, 92, 255);;
 }
 
 .error{
@@ -44,20 +56,20 @@ body{
 
 a{
     padding: 1.5rem;
-    color: var(--color-h1);
+    color: rgb(198, 92, 255);;
     text-decoration: none;
     border-radius: 5rem;
     transition: var(--transition);
 }
 
 a:hover{
-    color: var(--color-white);
+    color: var(--color-white-new);
 }
 
 .main__container{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .outer__main{
@@ -66,7 +78,7 @@ a:hover{
 }
 
 .form__content{
-    padding: 5rem;
+    padding: 2rem;
 }
 
 .form__container{
@@ -100,6 +112,7 @@ h1{
     display: inline-block;
     color: var(--color-primary);
     background-color: var(--color-after-hover);
+    background-color: var(--color-after-hover);
     padding: 1rem 3rem;
     border-radius: 0.4rem;
     cursor: pointer;
@@ -109,8 +122,9 @@ h1{
 }
 
 .btn:hover{
-    background-color: var(--color-white);
+    background-color: var(--color-white-new);
     color: var(--color-bg);
+    color: black;
     border-color: transparent;
 }
 
@@ -129,7 +143,8 @@ select{
     padding: 1.5rem;
     border-radius: 0.5rem;
     background-color: rgba(0,0,0,.5);;
-    border: 2px solid var(--color-primary-variant);
+    background: rgb(0, 0, 0);
+    border: 2px solid rgb(198, 92, 255);
     resize: none;
     color: var(--color-white);
     -webkit-appearance: none;
@@ -141,13 +156,14 @@ select{
 }
 
 input{
-    width: 83%;
+    width: 85%;
     padding: 1.5rem;
     border-radius: 0.5rem;
-    background: rgba(0,0,0,.5);
-    border: 2px solid var(--color-primary-variant);
+    /* background: rgba(0,0,0,.5); */
+    background: rgb(0, 0, 0);
+    border: 2px solid rgb(198, 92, 255);
     resize: none;
-    color: var(--color-white);
+    color: var(--color-after-hover);
     border-radius: 1rem;
 }
 
@@ -157,6 +173,7 @@ input{
 
 label{
     font-size: 1rem;
+    font-weight: bold;
 }
 
 .home__container{
