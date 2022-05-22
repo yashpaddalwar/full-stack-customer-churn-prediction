@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import pickle
 import sys
 import logging
+import numpy as np
 
 model = pickle.load(open('finalmodelchurn.pickle','rb'))
 model1_probability1 = pickle.load(open('probabilities.pickle','rb'))
@@ -224,13 +225,25 @@ def predict():
         else:
             tenure_Sixty = 0
         
-
+        totalcharges = np.log(totalcharges)
         arr = [[seniorcitizen,monthlycharges,totalcharges,gender_Male,Partner_Yes,Dependent_Yes,PhoneService,MultipleLinesNoPhoneService,MultipleLines_Yes,InternetServiceFibreOptics,InternetService_No,OnlineSecurity_NoInternetService,OnlineSecurity_Yes,OnlineBackup_NoInternetService,OnlineBackup_Yes,DeviceProtection_NoInternetService,DeviceProtection_Yes,TechSupport_NoInternetService,TechSupport_Yes,StreamingTV_NoInternetService,StreamingTV_Yes,StreamingTVMovies_NoInternetService,StreamingTVMovies_Yes,Contract_One,Contract_Two,PaperlessBilling_Yes,PaymentMethod_CreditCard,PaymentMethod_ElectronicCheck,PaymentMethod_MailedCheck,tenure_Twelve,tenure_Twentyfour,tenure_Thirtysix,tenure_Fortyeight,tenure_Sixty]]
 
         prediction_arr = model.predict(arr)
-        prediction_probability = model1_probability1.predict_proba(arr)[:,1]
-        prediction_probability = "{:.2f}".format(prediction_probability[0]*100)
+        # prediction_probability = model1_probability1.predict_proba(arr)[:,1]
+        # prediction_probability = "{:.2f}".format(prediction_probability[0]*100)
 
+        prediction_probability = model.predict_proba(arr)[:,-1]
+        # prediction_probability = "{:.2f}".format(prediction_probability[0]*100)
+        prediction_probability = prediction_probability[0]*100
+
+        print(prediction_probability)
+
+        if prediction_probability < 50:
+            prediction_probability_new = 100 - prediction_probability
+        else:
+            prediction_probability_new = prediction_probability
+
+        print(prediction_probability_new)
         lst = []
         for i in arr:
             lst.append(i)
@@ -245,7 +258,7 @@ def predict():
         # prediction_probability = round(prediction_probability)
         print(prediction_probability)
         # return render_template('predict.html',prediction=prediction,final_prob=final_prob)
-        return render_template('predict.html',prediction=prediction,prediction_probability=prediction_probability)
+        return render_template('predict.html',prediction=prediction,prediction_probability_new=prediction_probability_new)
     else:    
         return render_template('home.html')
 

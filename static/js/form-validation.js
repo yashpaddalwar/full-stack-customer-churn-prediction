@@ -9,7 +9,7 @@ jQuery('#churnprediction').validate({
         },
         totalcharges:{
             required:true,
-            range:[2,10]
+            range:[19,8684]
         },
         gender:{
             required:true
@@ -73,7 +73,7 @@ jQuery('#churnprediction').validate({
         },
         totalcharges:{
             required: "This field is required!",
-            range: "Total charges ranges from 2 to 10"
+            range: "Total charges ranges from 19 to 8684"
         },
         gender:{
             required: "This field is required!"
